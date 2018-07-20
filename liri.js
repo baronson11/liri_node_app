@@ -16,11 +16,16 @@ let media = process.argv[3];
 
 // TWITTER COMMANDS ---------------------------------------
 if (command === 'my-tweets') {
-  console.log(client);
-  let params = {screen_name: 'britney76944406'};
+  var params = {screen_name: 'britney76944406'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
-      console.log(tweets);
+      for (i = 0; i < tweets.length; i++) {
+        if (i < 20) {
+          console.log("Tweet: " + tweets[i].text);
+          console.log("Created: " + tweets[i].created_at);
+          console.log("---------------------------------");
+        }
+      }
     }
   });
 }
