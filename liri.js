@@ -8,7 +8,7 @@ const Twitter = require("twitter");
 const Spotify = require("node-spotify-api")
 const fs = require("fs");
 
-// SPOTIFY API -------------------------------------------
+// SPOTIFY & TWITTER API -------------------------------------------
 const spotify = new Spotify(keys.spotify);
 const client = new Twitter(keys.twitter);
 
