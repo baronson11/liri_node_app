@@ -24,9 +24,9 @@ if (command === 'my-tweets') {
     if (!err) {
       for (i = 0; i < tweets.length; i++) {
         if (i < 20) {
-          console.log("Tweet: " + tweets[i].text);
-          console.log("Created: " + tweets[i].created_at);
-          console.log("---------------------------------");
+          console.log(`Tweet: ${tweets[i].text}`);
+          console.log(`Created: ${tweets[i].created_at}`);
+          console.log(`---------------------------------`);
         }
       }
     } else {
@@ -44,11 +44,11 @@ const spotifyFunc = function(param) {
       }
 
       for (i = 0; i < data.tracks.items.length; i++) {
-        console.log("The name of the song is: " + data.tracks.items[i].name);
-        console.log("The artist's name is: " + data.tracks.items[i].album.artists[0].name);
-        console.log("The album name of this song is: " + data.tracks.items[i].album.name);
-        console.log("The URL to listen to this song: " + data.tracks.items[i].album.external_urls.spotify);
-        console.log("----------------------------------------------------------------------");
+        console.log(`The name of the song is: ${data.tracks.items[i].name}`);
+        console.log(`The artist's name is: ${data.tracks.items[i].album.artists[0].name}`);
+        console.log(`The album name of this song is: ${data.tracks.items[i].album.name}`);
+        console.log(`The URL to listen to this song: ${data.tracks.items[i].album.external_urls.spotify}`);
+        console.log(`----------------------------------------------------------------------`);
       }
     });
   }
@@ -64,11 +64,11 @@ if (command === 'spotify-this-song') {
     }
 
     for (i = 0; i < data.tracks.items.length; i++) {
-      console.log("The name of the song is: " + data.tracks.items[i].name);
-      console.log("The artist's name is: " + data.tracks.items[i].album.artists[0].name);
-      console.log("The album name of this song is: " + data.tracks.items[i].album.name);
-      console.log("The URL to listen to this song: " + data.tracks.items[i].album.external_urls.spotify);
-      console.log("----------------------------------------------------------------------");
+      console.log(`The name of the song is: ${data.tracks.items[i].name}`);
+      console.log(`The artist's name is: ${data.tracks.items[i].album.artists[0].name}`);
+      console.log(`The album name of this song is: ${data.tracks.items[i].album.name}`);
+      console.log(`The URL to listen to this song: ${data.tracks.items[i].album.external_urls.spotify}`);
+      console.log(`----------------------------------------------------------------------`);
     }
   });
 }
@@ -77,14 +77,14 @@ if (command === 'spotify-this-song') {
 if (command === 'movie-this') {
   request(`http://www.omdbapi.com/?t=${media}&y=&plot=short&apikey=trilogy`, function(err, response, content) {
     if (!err && response.statusCode === 200 && media) {
-      console.log("The title of the movie is: " + JSON.parse(content).Title);
-      console.log("The year this movie released: " + JSON.parse(content).Released);
-      console.log("The movie's IMDB rating is: " + JSON.parse(content).imdbRating);
-      console.log("The movie's Metascore is: " + JSON.parse(content).Metascore);
-      console.log("The movie's production took place in: " + JSON.parse(content).Country);
-      console.log("The movie's language is: " + JSON.parse(content).Language);
-      console.log("The movie's plot is: " + JSON.parse(content).Plot);
-      console.log("The actors who played in this movie are: " + JSON.parse(content).Actors);
+      console.log(`The title of the movie is: ${JSON.parse(content).Title}`);
+      console.log(`The year this movie released: ${JSON.parse(content).Released}`);
+      console.log(`The movie's IMDB rating is: ${JSON.parse(content).imdbRating}`);
+      console.log(`The movie's Metascore is: ${JSON.parse(content).Metascore}`);
+      console.log(`The movie's production took place in: ${JSON.parse(content).Country}`);
+      console.log(`The movie's language is: ${JSON.parse(content).Language}`);
+      console.log(`The movie's plot is: ${JSON.parse(content).Plot}`);
+      console.log(`The actors who played in this movie are: ${JSON.parse(content).Actors}`);
     } else if (!err && response.statusCode === 200 && !media) {
       console.log('Please put in a movie! Or go watch Mr. Nobody! Its on Netflix!');
     } else {
