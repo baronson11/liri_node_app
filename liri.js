@@ -54,23 +54,8 @@ const spotifyFunc = function(param) {
   }
 }
 
-// DUPLICATE CODE....TRYING TO FIGURE OUT HOW TO MAKE FUNCTION AVAILABLE
-// THROUGH BOTH THE COMMAND LINE AND THROUGH "DO-WHAT-THIS-SAYS"
-
 if (command === 'spotify-this-song') {
-  spotify.search({ type: 'track', query: `${media}`, limit: 5 }, function(err, data) {
-    if (err) {
-      return err;
-    }
-
-    for (i = 0; i < data.tracks.items.length; i++) {
-      console.log(`The name of the song is: ${data.tracks.items[i].name}`);
-      console.log(`The artist's name is: ${data.tracks.items[i].album.artists[0].name}`);
-      console.log(`The album name of this song is: ${data.tracks.items[i].album.name}`);
-      console.log(`The URL to listen to this song: ${data.tracks.items[i].album.external_urls.spotify}`);
-      console.log(`----------------------------------------------------------------------`);
-    }
-  });
+  spotifyFunc(media);
 }
 
 // MOVIE COMMANDS ----------------------------------------
@@ -84,7 +69,7 @@ if (command === 'movie-this') {
       console.log(`The movie's production took place in: ${JSON.parse(content).Country}`);
       console.log(`The movie's language is: ${JSON.parse(content).Language}`);
       console.log(`The movie's plot is: ${JSON.parse(content).Plot}`);
-      console.log(`The actors who played in this movie are: ${JSON.parse(content).Actors}`);
+      console.log(`The actors who played in this movie are: " + JSON.parse(content).Actors}`);
     } else if (!err && response.statusCode === 200 && !media) {
       console.log('Please put in a movie! Or go watch Mr. Nobody! Its on Netflix!');
     } else {
