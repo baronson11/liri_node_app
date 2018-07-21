@@ -1,15 +1,16 @@
+//USING DOTENV TO READ .ENV FILE -------------------------
 require("dotenv").config();
 
 // GET KEYS.JS & ANY ADDITIONAL REQUIRED FILES & PACKAGES -
-let keys = require("./keys.js");
-let request = require("request");
-let Twitter = require("twitter");
-let Spotify = require("node-spotify-api")
-let fs = require("fs");
+const keys = require("./keys.js");
+const request = require("request");
+const Twitter = require("twitter");
+const Spotify = require("node-spotify-api")
+const fs = require("fs");
 
 // SPOTIFY API -------------------------------------------
-let spotify = new Spotify(keys.spotify);
-let client = new Twitter(keys.twitter);
+const spotify = new Spotify(keys.spotify);
+const client = new Twitter(keys.twitter);
 
 // GRABBING COMMAND LINE VALUES --------------------------
 let command = process.argv[2];
@@ -59,7 +60,7 @@ const spotifyFunc = function(param) {
 if (command === 'spotify-this-song') {
   spotify.search({ type: 'track', query: `${media}`, limit: 5 }, function(err, data) {
     if (err) {
-      return console.log('Error occurred: ' + err);
+      return err;
     }
 
     for (i = 0; i < data.tracks.items.length; i++) {
@@ -74,8 +75,8 @@ if (command === 'spotify-this-song') {
 
 // MOVIE COMMANDS ----------------------------------------
 if (command === 'movie-this') {
-  request(`http://www.omdbapi.com/?t=${media}&y=&plot=short&apikey=trilogy`, function(error, response, content) {
-    if (!error && response.statusCode === 200 && media) {
+  request(`http://www.omdbapi.com/?t=${media}&y=&plot=short&apikey=trilogy`, function(err, response, content) {
+    if (!err && response.statusCode === 200 && media) {
       console.log("The title of the movie is: " + JSON.parse(content).Title);
       console.log("The year this movie released: " + JSON.parse(content).Released);
       console.log("The movie's IMDB rating is: " + JSON.parse(content).imdbRating);
@@ -84,10 +85,10 @@ if (command === 'movie-this') {
       console.log("The movie's language is: " + JSON.parse(content).Language);
       console.log("The movie's plot is: " + JSON.parse(content).Plot);
       console.log("The actors who played in this movie are: " + JSON.parse(content).Actors);
-    } else if (!error && response.statusCode === 200 && !media) {
+    } else if (!err && response.statusCode === 200 && !media) {
       console.log('Please put in a movie! Or go watch Mr. Nobody! Its on Netflix!');
     } else {
-      return error;
+      return err;
     }
   });
 }
@@ -101,11 +102,11 @@ if (command === 'do-what-it-says') {
     }
 
     let arr = data.split(",");
-    let newCommand = arr[0];
-    command = newCommand;
-    let newMedia = arr[1];
-    media = newMedia;
+    command = arr[0];
+    media = arr[1];
 
-    spotifyFunc(newMedia);
+    if (command === 'spotify-this-song') {
+     spotifyFunc(media);
+    }
   });
 }
